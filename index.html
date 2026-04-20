@@ -662,27 +662,158 @@
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .portal-cl-header h4 { color: var(--white); font-size: 15px; font-weight: 600; }
-  .portal-cl-items { padding: 8px 0; }
+  .portal-cl-items { padding: 4px 0; }
+
+  /* Expandable CL item */
+  .cl-item-wrap { border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .cl-item-wrap:last-child { border-bottom: none; }
   .portal-cl-item {
     display: flex; align-items: center; gap: 12px;
-    padding: 11px 20px; font-size: 14px; color: rgba(255,255,255,0.75);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    cursor: pointer; transition: background 0.2s;
+    padding: 12px 20px; font-size: 14px; color: rgba(255,255,255,0.75);
+    cursor: pointer; transition: background 0.2s; user-select: none;
   }
-  .portal-cl-item:last-child { border-bottom: none; }
   .portal-cl-item:hover { background: rgba(255,255,255,0.03); }
   .portal-cl-item input[type=checkbox] {
     width: 16px; height: 16px; flex-shrink: 0;
     accent-color: var(--gold); cursor: pointer;
   }
-  .portal-cl-item.checked { color: rgba(255,255,255,0.35); text-decoration: line-through; }
+  .portal-cl-item.checked { color: rgba(255,255,255,0.4); }
+  .portal-cl-item.checked .cl-item-text { text-decoration: line-through; }
+  .cl-item-text { flex: 1; }
   .sofort-badge {
-    margin-left: auto; flex-shrink: 0;
+    flex-shrink: 0;
     background: rgba(230,126,34,0.2); color: #f0a255;
     border: 1px solid rgba(230,126,34,0.3);
     font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
     padding: 3px 8px; border-radius: 100px;
   }
+  .cl-expand-btn {
+    background: none; border: none; color: rgba(255,255,255,0.3);
+    font-size: 12px; cursor: pointer; padding: 4px; flex-shrink: 0;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .cl-expand-btn:hover { color: var(--gold); }
+  .cl-expand-btn.open { color: var(--gold); transform: rotate(180deg); }
+
+  /* Foto expand panel */
+  .cl-foto-panel {
+    display: none; padding: 12px 20px 16px 48px;
+    background: rgba(0,0,0,0.15); border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .cl-foto-panel.open { display: block; }
+  .cl-foto-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cl-foto-slot { }
+  .cl-foto-label {
+    font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .cl-foto-label .req { color: #f0a255; font-size: 10px; }
+  .cl-foto-upload {
+    border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px;
+    aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 6px; cursor: pointer;
+    transition: all 0.2s; position: relative; overflow: hidden;
+    background: rgba(255,255,255,0.02);
+  }
+  .cl-foto-upload:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+  .cl-foto-upload.has-foto { border-style: solid; border-color: rgba(255,255,255,0.2); }
+  .cl-foto-upload img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  .cl-foto-upload .upload-icon { font-size: 20px; color: rgba(255,255,255,0.2); }
+  .cl-foto-upload .upload-hint { font-size: 10px; color: rgba(255,255,255,0.25); }
+  .cl-foto-del-btn {
+    position: absolute; top: 5px; right: 5px; z-index: 2;
+    background: rgba(192,57,43,0.9); border: none; color: white;
+    width: 20px; height: 20px; border-radius: 50%; cursor: pointer;
+    font-size: 10px; display: none; align-items: center; justify-content: center;
+  }
+  .cl-foto-upload.has-foto:hover .cl-foto-del-btn { display: flex; }
+  .cl-foto-upload.has-foto .upload-icon,
+  .cl-foto-upload.has-foto .upload-hint { display: none; }
+  .cl-item-foto-count {
+    font-size: 10px; color: var(--gold); margin-left: 4px;
+  }
+
+  /* REPORT LINK BOX */
+  .report-link-box {
+    background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 14px; padding: 20px 24px; margin-top: 20px;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .report-link-box .rl-icon { font-size: 24px; flex-shrink: 0; }
+  .report-link-box .rl-text { flex: 1; min-width: 200px; }
+  .report-link-box .rl-text p { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+  .report-link-box .rl-text strong { color: var(--white); font-size: 15px; }
+  .report-link-input {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px; padding: 10px 14px; color: var(--gold);
+    font-family: inherit; font-size: 12px; width: 100%; margin-top: 10px;
+    outline: none; cursor: text;
+  }
+  .report-copy-btn {
+    background: var(--gold); color: var(--navy); border: none;
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .report-copy-btn:hover { background: var(--gold-light); }
+  .report-copy-btn.copied { background: #2e7d52; color: white; }
+
+  /* KUNDENANSICHT (teilbarer Bericht) */
+  #bericht-overlay {
+    display: none; position: fixed; inset: 0; z-index: 300;
+    background: #0d1220; overflow-y: auto;
+  }
+  #bericht-overlay.open { display: block; }
+  .bericht-wrap { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+  .bericht-header { margin-bottom: 40px; }
+  .bericht-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+  .bericht-logo-text strong { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--white); display: block; }
+  .bericht-logo-text small { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+  .bericht-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .bericht-meta { font-size: 14px; color: rgba(255,255,255,0.4); }
+  .bericht-paket-badge {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-top: 12px;
+  }
+  .bericht-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0;
+  }
+  .bericht-stat {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 16px; text-align: center;
+  }
+  .bericht-stat .bv { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--gold); line-height: 1; }
+  .bericht-stat .bl { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px; letter-spacing: 0.5px; }
+  .bericht-section { margin-bottom: 32px; }
+  .bericht-section-title {
+    font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .bericht-item {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; overflow: hidden; margin-bottom: 12px;
+  }
+  .bericht-item-header {
+    padding: 14px 18px; display: flex; align-items: center; gap: 12px;
+  }
+  .bericht-item-check {
+    width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 11px;
+  }
+  .check-done { background: rgba(46,125,82,0.3); color: #5cb88a; border: 1px solid rgba(46,125,82,0.4); }
+  .check-open { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.1); }
+  .bericht-item-text { flex: 1; font-size: 14px; color: rgba(255,255,255,0.8); }
+  .bericht-item-fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 18px 14px; }
+  .bericht-foto-box { }
+  .bericht-foto-lbl { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+  .bericht-foto-img { width: 100%; border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; }
+  .bericht-foto-empty { width: 100%; border-radius: 8px; aspect-ratio: 4/3; background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 12px; color: rgba(255,255,255,0.2); }
+  .bericht-footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 13px; color: rgba(255,255,255,0.3); text-align: center; }
+
   .cl-notes-area {
     margin: 16px 20px; padding: 12px 14px;
     background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
@@ -1153,8 +1284,18 @@
           <!-- CHECKLISTE TAB -->
           <div id="dtab-checkliste" style="display:none">
             <div class="portal-checklist" id="admin-cl-content"></div>
-            <div style="margin-top:16px">
+            <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
               <button class="btn-sm btn-gold" onclick="saveCL()">Checkliste speichern</button>
+              <button class="btn-sm btn-ghost" onclick="generateReportLink()">🔗 Kundenlink generieren</button>
+            </div>
+            <div id="admin-report-link-box" style="display:none" class="report-link-box">
+              <div class="rl-icon">🔗</div>
+              <div class="rl-text">
+                <strong>Teilbarer Kundenbericht</strong>
+                <p>Diesen Link per WhatsApp, Email oder SMS an den Kunden schicken. Kein Login nötig.</p>
+                <input type="text" class="report-link-input" id="report-link-url" readonly onclick="this.select()">
+              </div>
+              <button class="report-copy-btn" id="report-copy-btn" onclick="copyReportLink()">Link kopieren</button>
             </div>
           </div>
 
@@ -1197,8 +1338,18 @@
           </div>
           <div id="stab-checkliste" style="display:none">
             <div class="portal-checklist" id="staff-cl-content"></div>
-            <div style="margin-top:16px">
+            <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
               <button class="btn-sm btn-gold" onclick="saveStaffCL()">Speichern</button>
+              <button class="btn-sm btn-ghost" onclick="generateStaffReportLink()">🔗 Kundenlink generieren</button>
+            </div>
+            <div id="staff-report-link-box" style="display:none" class="report-link-box">
+              <div class="rl-icon">🔗</div>
+              <div class="rl-text">
+                <strong>Teilbarer Kundenbericht</strong>
+                <p>Diesen Link direkt an den Kunden schicken – kein Login nötig.</p>
+                <input type="text" class="report-link-input" id="staff-report-link-url" readonly onclick="this.select()">
+              </div>
+              <button class="report-copy-btn" id="staff-copy-btn" onclick="copyStaffReportLink()">Link kopieren</button>
             </div>
           </div>
         </div>
@@ -1242,7 +1393,41 @@
   </div>
 </div>
 
-<!-- MODALS -->
+<!-- BERICHT OVERLAY (Kundenansicht) -->
+<div id="bericht-overlay">
+  <div style="background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.08);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="cs-logo-icon sm"><span>CS</span></div>
+      <span style="color:rgba(255,255,255,0.6);font-size:14px">Kundenbericht</span>
+    </div>
+    <button onclick="closeBericht()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);font-family:inherit;font-size:13px;padding:7px 16px;border-radius:8px;cursor:pointer">✕ Schließen</button>
+  </div>
+  <div class="bericht-wrap">
+    <div class="bericht-header">
+      <div class="bericht-logo">
+        <div class="cs-logo-icon"><span>CS</span></div>
+        <div class="bericht-logo-text">
+          <strong>Continuum Services</strong>
+          <small>Dortmund · Werterhalt</small>
+        </div>
+      </div>
+      <div class="bericht-title" id="b-title"></div>
+      <div class="bericht-meta" id="b-meta"></div>
+      <div id="b-paket-badge" class="bericht-paket-badge"></div>
+    </div>
+    <div class="bericht-stats">
+      <div class="bericht-stat"><div class="bv" id="b-erledigt">0</div><div class="bl">Erledigt</div></div>
+      <div class="bericht-stat"><div class="bv" id="b-fotos">0</div><div class="bl">Fotos</div></div>
+      <div class="bericht-stat"><div class="bv" id="b-datum"></div><div class="bl">Datum</div></div>
+    </div>
+    <div id="b-content"></div>
+    <div class="bericht-footer">
+      Continuum Services · Soulaiman Hadduch · 0157 38184763 · continuum-services.de
+    </div>
+  </div>
+</div>
+
+
 <div class="modal-bg" id="delete-modal">
   <div class="modal-box">
     <h3>Objekte löschen?</h3>
@@ -1511,41 +1696,103 @@ function deleteFoto(i) {
 }
 function renderAdminCL(o) {
   const container = document.getElementById('admin-cl-content');
+  container.innerHTML = '';
   const paket = o.paket;
-  const sections = [
-    { title: 'Sichtkontrolle Außenbereich', tag: 'Basic · Premium · Abo', items: CL_BASIC },
-  ];
+  const sections = [{ title: 'Sichtkontrolle Außenbereich', tag: 'Basic · Premium · Abo', items: CL_BASIC }];
   if (paket === 'Premium' || paket === 'Abo') {
     sections.push({ title: 'Sicherheit & Prävention', tag: 'Premium · Abo', items: CL_SICHERHEIT });
     sections.push({ title: 'Funktionale Kontrolle', tag: 'Premium · Abo', items: CL_FUNKTIONAL });
   }
-  container.innerHTML = '';
   sections.forEach(sec => {
     const div = document.createElement('div');
     div.className = 'portal-cl-section';
     div.innerHTML = `<div class="portal-cl-header"><h4>${sec.title}</h4><span class="paket-tag tag-basic" style="font-size:10px">${sec.tag}</span></div>
-    <div class="portal-cl-items">${sec.items.map(item => {
-      const checked = o.cl[item.id] || false;
-      return `<label class="portal-cl-item ${checked ? 'checked' : ''}">
-        <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleCLItem('${item.id}', this, this.closest('.portal-cl-item'))">
-        <span>${item.text}</span>
-        ${item.sofort ? '<span class="sofort-badge">Sofortmaßnahme</span>' : ''}
-      </label>`;
-    }).join('')}</div>
-    <textarea class="cl-notes-area" placeholder="Notizen zu diesem Abschnitt…">${o.cl['notes_' + sec.title] || ''}</textarea>`;
+    <div class="portal-cl-items">${sec.items.map(item => buildCLItem(item, o, 'admin')).join('')}</div>`;
     container.appendChild(div);
   });
 }
-function toggleCLItem(id, cb, row) {
-  const o = objekte.find(x => x.id === currentObjektId);
+
+function buildCLItem(item, o, ctx) {
+  const checked = o.cl[item.id] || false;
+  const fotos = o.cl['fotos_' + item.id] || { before: null, after: null };
+  const fotoCount = (fotos.before ? 1 : 0) + (fotos.after ? 1 : 0);
+  const prefix = ctx + '_' + o.id;
+  return `<div class="cl-item-wrap">
+    <div class="portal-cl-item ${checked ? 'checked' : ''}" id="clrow_${prefix}_${item.id}">
+      <input type="checkbox" ${checked ? 'checked' : ''} onclick="event.stopPropagation();toggleCLItem('${item.id}','${ctx}',${o.id},this,this.closest('.portal-cl-item'))" style="width:16px;height:16px;flex-shrink:0;accent-color:var(--gold);cursor:pointer">
+      <span class="cl-item-text">${item.text}${fotoCount > 0 ? `<span class="cl-item-foto-count">📷 ${fotoCount}</span>` : ''}</span>
+      ${item.sofort ? '<span class="sofort-badge">Sofortmaßnahme</span>' : ''}
+      <button class="cl-expand-btn ${false ? 'open' : ''}" onclick="event.stopPropagation();toggleCLFotoPanel('panel_${prefix}_${item.id}',this)" title="Fotos">▼</button>
+    </div>
+    <div class="cl-foto-panel" id="panel_${prefix}_${item.id}">
+      <div class="cl-foto-row">
+        <div class="cl-foto-slot">
+          <div class="cl-foto-label">Vorher ${item.sofort ? '<span class="req">● Pflicht</span>' : ''}</div>
+          <div class="cl-foto-upload ${fotos.before ? 'has-foto' : ''}" onclick="triggerCLFoto('${item.id}','before','${ctx}',${o.id})">
+            ${fotos.before ? `<img src="${fotos.before}">` : '<div class="upload-icon">📷</div><div class="upload-hint">Foto hochladen</div>'}
+            <button class="cl-foto-del-btn" onclick="event.stopPropagation();deleteCLFoto('${item.id}','before','${ctx}',${o.id})">✕</button>
+          </div>
+        </div>
+        <div class="cl-foto-slot">
+          <div class="cl-foto-label">Nachher ${item.sofort ? '<span class="req">● Pflicht</span>' : ''}</div>
+          <div class="cl-foto-upload ${fotos.after ? 'has-foto' : ''}" onclick="triggerCLFoto('${item.id}','after','${ctx}',${o.id})">
+            ${fotos.after ? `<img src="${fotos.after}">` : '<div class="upload-icon">📷</div><div class="upload-hint">Foto hochladen</div>'}
+            <button class="cl-foto-del-btn" onclick="event.stopPropagation();deleteCLFoto('${item.id}','after','${ctx}',${o.id})">✕</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleCLFotoPanel(panelId, btn) {
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  const isOpen = panel.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
+
+let clFotoTarget = null;
+function triggerCLFoto(itemId, side, ctx, objId) {
+  clFotoTarget = { itemId, side, ctx, objId };
+  let inp = document.getElementById('cl-foto-file-input');
+  if (!inp) {
+    inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/*'; inp.id = 'cl-foto-file-input';
+    inp.style.display = 'none';
+    inp.onchange = handleCLFoto;
+    document.body.appendChild(inp);
+  }
+  inp.value = '';
+  inp.click();
+}
+function handleCLFoto(e) {
+  const file = e.target.files[0];
+  if (!file || !clFotoTarget) return;
+  const { itemId, side, ctx, objId } = clFotoTarget;
+  const o = objekte.find(x => x.id === objId);
+  if (!o) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    if (!o.cl['fotos_' + itemId]) o.cl['fotos_' + itemId] = { before: null, after: null };
+    o.cl['fotos_' + itemId][side] = ev.target.result;
+    if (ctx === 'admin') renderAdminCL(o);
+    else renderStaffCL(o);
+  };
+  reader.readAsDataURL(file);
+}
+function deleteCLFoto(itemId, side, ctx, objId) {
+  const o = objekte.find(x => x.id === objId);
+  if (!o || !o.cl['fotos_' + itemId]) return;
+  o.cl['fotos_' + itemId][side] = null;
+  if (ctx === 'admin') renderAdminCL(o);
+  else renderStaffCL(o);
+}
+function toggleCLItem(id, ctx, objId, cb, row) {
+  const o = objekte.find(x => x.id === objId);
   if (o) { o.cl[id] = cb.checked; row.classList.toggle('checked', cb.checked); }
 }
 function saveCL() {
-  const o = objekte.find(x => x.id === currentObjektId);
-  if (!o) return;
-  document.querySelectorAll('.cl-notes-area').forEach((ta, i) => {
-    o.cl['notes_' + i] = ta.value;
-  });
   alert('Checkliste gespeichert ✓');
 }
 
@@ -1619,21 +1866,9 @@ function renderStaffCL(o) {
     const div = document.createElement('div');
     div.className = 'portal-cl-section';
     div.innerHTML = `<div class="portal-cl-header"><h4>${sec.title}</h4></div>
-    <div class="portal-cl-items">${sec.items.map(item => {
-      const checked = o.cl[item.id] || false;
-      const showSofort = (paket === 'Premium' || paket === 'Abo') && item.sofort;
-      return `<label class="portal-cl-item ${checked ? 'checked' : ''}">
-        <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleStaffCLItem('${item.id}', this, this.closest('.portal-cl-item'))">
-        <span>${item.text}</span>
-        ${showSofort ? '<span class="sofort-badge">Sofortmaßnahme</span>' : ''}
-      </label>`;
-    }).join('')}</div>`;
+    <div class="portal-cl-items">${sec.items.map(item => buildCLItem(item, o, 'staff')).join('')}</div>`;
     container.appendChild(div);
   });
-}
-function toggleStaffCLItem(id, cb, row) {
-  const o = objekte.find(x => x.id === currentStaffObjektId);
-  if (o) { o.cl[id] = cb.checked; row.classList.toggle('checked', cb.checked); }
 }
 function saveStaffCL() { alert('Checkliste gespeichert ✓'); }
 
@@ -1705,7 +1940,108 @@ function renderClientAbo() {
   });
 }
 
-// ===== MODAL =====
+// ===== REPORT LINK =====
+function generateReportLink() {
+  const o = objekte.find(x => x.id === currentObjektId);
+  if (!o) return;
+  const encoded = btoa(encodeURIComponent(JSON.stringify({ id: o.id })));
+  const url = `${window.location.href.split('#')[0]}#bericht-${encoded}`;
+  document.getElementById('report-link-url').value = url;
+  document.getElementById('admin-report-link-box').style.display = 'flex';
+}
+function copyReportLink() {
+  const url = document.getElementById('report-link-url').value;
+  navigator.clipboard.writeText(url).catch(() => {});
+  const btn = document.getElementById('report-copy-btn');
+  btn.textContent = '✓ Kopiert!'; btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'Link kopieren'; btn.classList.remove('copied'); }, 2500);
+}
+function generateStaffReportLink() {
+  const o = objekte.find(x => x.id === currentStaffObjektId);
+  if (!o) return;
+  const encoded = btoa(encodeURIComponent(JSON.stringify({ id: o.id })));
+  const url = `${window.location.href.split('#')[0]}#bericht-${encoded}`;
+  document.getElementById('staff-report-link-url').value = url;
+  document.getElementById('staff-report-link-box').style.display = 'flex';
+}
+function copyStaffReportLink() {
+  const url = document.getElementById('staff-report-link-url').value;
+  navigator.clipboard.writeText(url).catch(() => {});
+  const btn = document.getElementById('staff-copy-btn');
+  btn.textContent = '✓ Kopiert!'; btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'Link kopieren'; btn.classList.remove('copied'); }, 2500);
+}
+
+// ===== BERICHT OVERLAY =====
+function openBericht(o) {
+  const paket = o.paket;
+  document.getElementById('b-title').textContent = o.name;
+  document.getElementById('b-meta').textContent = o.addr + ' · Begehung vom ' + o.letzte;
+  const badge = document.getElementById('b-paket-badge');
+  badge.textContent = paket + '-Paket';
+  badge.style.background = paket === 'Basic' ? 'rgba(46,125,82,0.2)' : 'rgba(201,168,76,0.2)';
+  badge.style.color = paket === 'Basic' ? '#5cb88a' : '#c9a84c';
+
+  const allItems = [...CL_BASIC, ...(paket !== 'Basic' ? [...CL_SICHERHEIT, ...CL_FUNKTIONAL] : [])];
+  const doneItems = allItems.filter(i => o.cl[i.id]);
+  let fotoCount = 0;
+  allItems.forEach(i => { const f = o.cl['fotos_' + i.id]; if (f) { if (f.before) fotoCount++; if (f.after) fotoCount++; } });
+
+  document.getElementById('b-erledigt').textContent = doneItems.length + '/' + allItems.length;
+  document.getElementById('b-fotos').textContent = fotoCount;
+  document.getElementById('b-datum').textContent = o.letzte;
+
+  const sections = [{ title: 'Sichtkontrolle Außenbereich', items: CL_BASIC }];
+  if (paket !== 'Basic') {
+    sections.push({ title: 'Sicherheit & Prävention', items: CL_SICHERHEIT });
+    sections.push({ title: 'Funktionale Kontrolle', items: CL_FUNKTIONAL });
+  }
+
+  const content = document.getElementById('b-content');
+  content.innerHTML = '';
+  sections.forEach(sec => {
+    const secDiv = document.createElement('div');
+    secDiv.className = 'bericht-section';
+    let itemsHTML = sec.items.map(item => {
+      const done = o.cl[item.id];
+      const fotos = o.cl['fotos_' + item.id] || {};
+      const hasFotos = fotos.before || fotos.after;
+      return `<div class="bericht-item">
+        <div class="bericht-item-header">
+          <div class="bericht-item-check ${done ? 'check-done' : 'check-open'}">${done ? '✓' : '○'}</div>
+          <div class="bericht-item-text">${item.text}${item.sofort ? ' <span class="sofort-badge" style="margin-left:6px">Sofortmaßnahme</span>' : ''}</div>
+        </div>
+        ${hasFotos ? `<div class="bericht-item-fotos">
+          <div class="bericht-foto-box"><div class="bericht-foto-lbl">Vorher</div>${fotos.before ? `<img class="bericht-foto-img" src="${fotos.before}">` : '<div class="bericht-foto-empty">–</div>'}</div>
+          <div class="bericht-foto-box"><div class="bericht-foto-lbl">Nachher</div>${fotos.after ? `<img class="bericht-foto-img" src="${fotos.after}">` : '<div class="bericht-foto-empty">–</div>'}</div>
+        </div>` : ''}
+      </div>`;
+    }).join('');
+    secDiv.innerHTML = `<div class="bericht-section-title">${sec.title}</div>${itemsHTML}`;
+    content.appendChild(secDiv);
+  });
+
+  document.getElementById('bericht-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeBericht() {
+  document.getElementById('bericht-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Check URL hash for bericht on load
+window.addEventListener('load', () => {
+  const hash = window.location.hash;
+  if (hash.startsWith('#bericht-')) {
+    try {
+      const decoded = JSON.parse(decodeURIComponent(atob(hash.replace('#bericht-', ''))));
+      const o = objekte.find(x => x.id === decoded.id);
+      if (o) openBericht(o);
+    } catch(e) {}
+  }
+});
+
+
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 // ===== MOBILE =====
